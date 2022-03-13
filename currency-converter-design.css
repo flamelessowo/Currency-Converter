@@ -14,6 +14,7 @@ section{
     display: flex;
     align-items: center;
     border-radius: 25px;
+    box-shadow: 0 0 5px rgb(0, 0, 182)
 }
 .field{
     max-width: 200px;
@@ -23,6 +24,7 @@ section{
     height: 50%;
     font-size: 25px;
     border-radius: 25px;
+    box-shadow: 0 0 5px blue;
 }
 .field:hover{
     background-color: rgb(241, 241, 241);
@@ -55,6 +57,7 @@ section{
     height: 50%;
     font-size: 25px;
     border-radius: 25px;
+    box-shadow: 0 0 5px blue;
 }
 .endfield:hover{
     background-color: rgb(241, 241, 241);
