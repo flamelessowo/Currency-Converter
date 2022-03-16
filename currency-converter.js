@@ -22,7 +22,6 @@ function readTextFile(file, callback) {
 function fillCurrencies(){
     readTextFile('data/currencies.json', (text)=>{
         let data = JSON.parse(text);
-        console.log(data)
         for (const key in data) {
             let opt = document.createElement('option')
             opt.value = data[key]
@@ -37,11 +36,48 @@ function fillCurrencies(){
     })
 }
 
+moneyInput.addEventListener('change', (evt)=>{
+    try{
+        convertCurrencies({
+        fromCurrency:currenciesInput.options[currenciesInput.selectedIndex].innerText,
+        to: currenciesOutput.options[currenciesOutput.selectedIndex].innerText,
+        amount: moneyInput.value
+
+    })
+    }
+    catch (e){
+        console.log('Choose currencies and write number to convert')
+    }
+})
+
 currenciesInput.addEventListener('change', (evt)=>{
-    label.innerText = 'Current Currency: ' + evt.currentTarget.options[evt.currentTarget.selectedIndex].value;
+    label.innerText = 'Current Currency: ' + currenciesInput.options[evt.currentTarget.selectedIndex].value;
+    try{
+        convertCurrencies({
+        fromCurrency:currenciesInput.options[currenciesInput.selectedIndex].innerText,
+        to: currenciesOutput.options[currenciesOutput.selectedIndex].innerText,
+        amount: moneyInput.value
+
+    })
+    }
+    catch (e){
+        console.log('Choose currencies and write number to convert')
+    }
+
 })
 currenciesOutput.addEventListener('change', (evt)=>{
-    labelOutput.innerHTML = 'Converted To: ' + evt.currentTarget.options[evt.currentTarget.selectedIndex].value;
+    labelOutput.innerHTML = 'Converted To: ' + currenciesOutput.options[evt.currentTarget.selectedIndex].value;
+    try{
+        convertCurrencies({
+        fromCurrency:currenciesInput.options[currenciesInput.selectedIndex].innerText,
+        to: currenciesOutput.options[currenciesOutput.selectedIndex].innerText,
+        amount: moneyInput.value
+
+    })
+    }
+    catch (e){
+        console.log('Choose currencies and write number to convert')
+    }
 })
 
 window.onload = ()=>{
@@ -49,5 +85,26 @@ window.onload = ()=>{
 }
 //#endregion
 //#region Async backend logic
+async function convertCurrencies(data={}){
+    if (!currenciesInput.selectedIndex || !currenciesOutput.selectedIndex){
+        return
+    }
+    let url = new URL('http://localhost:8000/convert');
+    let params = {
+    fromCurrency: data.fromCurrency,
+    to: data.to,
+    amount: data.amount
+    }
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
 
+    const response = await fetch(url, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {'Content-Type': 'application/json'}
+    })
+    let json = await response.json()
+    moneyOutput.value = json.result
+
+}
 //#endregion
