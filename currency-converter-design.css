@@ -63,3 +63,8 @@ section{
     background-color: rgb(241, 241, 241);
     transition: 0.5s;
 }
+
+.h2convertTo{
+    text-align: right;
+
+}

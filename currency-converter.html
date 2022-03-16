@@ -3,17 +3,20 @@
 <head>
     <link rel="stylesheet" href="currency-converter-design.css">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Currency Exchanger</title>
 </head>
 <body>
-<section>
+    <h1>Currency Converter</h1>
+    <h2 class="h2stuff">Choose currency: </h2>
+    <h2 class="h2convertTo"></h2>
     <div class="container">
-        <select id="" class="select" style="margin-left: 50px"></select>
-        <input type="text" class="field" min="0" step="1"/>
+        <select id="currenciesInput" class="select" style="margin-left: 50px"></select>
+        <input id="moneyInput" type="number" class="field" min="0" step="1"/>
         <img src="Equal.png" alt="" class="image">
-        <input type="text" class="endfield">
-        <select id="" class="select"></select>
+        <input id="moneyOutput" type="number" class="endfield">
+        <select id="currenciesOutput" class="select"></select>
     </div>
-</section>
+    <script type="text/javascript" src="currency-converter.js"></script>
+
 </body>
 </html>
