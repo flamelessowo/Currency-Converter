@@ -46,6 +46,7 @@ currenciesInput.addEventListener('change', (evt)=>{
     handleConvertCurrencies()
 
 })
+
 currenciesOutput.addEventListener('change', (evt)=>{
     labelOutput.innerHTML = 'Converted To: ' + currenciesOutput.options[evt.currentTarget.selectedIndex].value;
     handleConvertCurrencies()
@@ -53,7 +54,6 @@ currenciesOutput.addEventListener('change', (evt)=>{
 
 imageConvert.addEventListener('click', (evt)=>{
     handleConvertCurrencies()
-    alert("okay")
 })
 
 window.onload = ()=>{
