@@ -1,6 +1,6 @@
 import requests
 
-url = "https://v1.nocodeapi.com/flaser/cx/oXfiZfWGvHfJalhT/rates/convert"
+url = ""
 
 
 def convert_currency(amount: str, from_currency: str, to_currency: str):
