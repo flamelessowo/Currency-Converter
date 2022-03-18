@@ -5,6 +5,7 @@ let moneyInput = document.getElementById('moneyInput')
 let moneyOutput = document.getElementById('moneyOutput')
 let label = document.querySelector('.h2stuff')
 let labelOutput = document.querySelector('.h2convertTo')
+let imageConvert = document.querySelector('.image')
 //#endregion
 //#region Selection Logic and FileRead Functions
 function readTextFile(file, callback) {
@@ -37,47 +38,22 @@ function fillCurrencies(){
 }
 
 moneyInput.addEventListener('change', (evt)=>{
-    try{
-        convertCurrencies({
-        fromCurrency:currenciesInput.options[currenciesInput.selectedIndex].innerText,
-        to: currenciesOutput.options[currenciesOutput.selectedIndex].innerText,
-        amount: moneyInput.value
-
-    })
-    }
-    catch (e){
-        console.log('Choose currencies and write number to convert')
-    }
+    handleConvertCurrencies()
 })
 
 currenciesInput.addEventListener('change', (evt)=>{
     label.innerText = 'Current Currency: ' + currenciesInput.options[evt.currentTarget.selectedIndex].value;
-    try{
-        convertCurrencies({
-        fromCurrency:currenciesInput.options[currenciesInput.selectedIndex].innerText,
-        to: currenciesOutput.options[currenciesOutput.selectedIndex].innerText,
-        amount: moneyInput.value
-
-    })
-    }
-    catch (e){
-        console.log('Choose currencies and write number to convert')
-    }
+    handleConvertCurrencies()
 
 })
 currenciesOutput.addEventListener('change', (evt)=>{
     labelOutput.innerHTML = 'Converted To: ' + currenciesOutput.options[evt.currentTarget.selectedIndex].value;
-    try{
-        convertCurrencies({
-        fromCurrency:currenciesInput.options[currenciesInput.selectedIndex].innerText,
-        to: currenciesOutput.options[currenciesOutput.selectedIndex].innerText,
-        amount: moneyInput.value
+    handleConvertCurrencies()
+})
 
-    })
-    }
-    catch (e){
-        console.log('Choose currencies and write number to convert')
-    }
+imageConvert.addEventListener('click', (evt)=>{
+    handleConvertCurrencies()
+    alert("okay")
 })
 
 window.onload = ()=>{
@@ -106,5 +82,19 @@ async function convertCurrencies(data={}){
     let json = await response.json()
     moneyOutput.value = json.result
 
+}
+
+function handleConvertCurrencies(){
+    try{
+        convertCurrencies({
+        fromCurrency:currenciesInput.options[currenciesInput.selectedIndex].innerText,
+        to: currenciesOutput.options[currenciesOutput.selectedIndex].innerText,
+        amount: moneyInput.value
+
+    })
+    }
+    catch (e){
+        console.log('Choose currencies and write number to convert')
+    }
 }
 //#endregion
